@@ -8,11 +8,11 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>springbootreact</artifactId>
+	<groupId>com.raymondhalim</groupId>
+	<artifactId>sg_train_route</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springbootreact</name>
-	<description>Demo project for Spring Boot</description>
+	<name>sg_train_route</name>
+	<description>Singapore Train Route</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -22,6 +22,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.neo4j.driver</groupId>
+			<artifactId>neo4j-java-driver-spring-boot-starter</artifactId>
+			<version>4.0.1.1</version>
 		</dependency>
 
 		<dependency>
