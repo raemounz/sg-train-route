@@ -4,21 +4,21 @@ import java.util.Map;
 
 public class NetworkNode {
 
-    private Long id;
+    private String id;
     private String type;
     private Map<String, Object> properties;
 
-    public NetworkNode(Long id, String type, Map<String, Object> properties) {
+    public NetworkNode(String id, String type, Map<String, Object> properties) {
         this.id = id;
         this.type = type;
         this.properties = properties;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

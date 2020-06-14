@@ -5,18 +5,14 @@ import java.util.Map;
 public class NetworkRelationship {
 
     private Long id;
-    private Long from;
-    private String fromCode;
-    private Long to;
-    private String toCode;
+    private String from;
+    private String to;
     private Map<String, Object> properties;
 
-    public NetworkRelationship(Long id, Long from, String fromCode, Long to, String toCode, Map<String, Object> properties) {
+    public NetworkRelationship(Long id, String from, String to, Map<String, Object> properties) {
         this.id = id;
         this.from = from;
-        this.fromCode = fromCode;
         this.to = to;
-        this.toCode = toCode;
         this.properties = properties;
     }
 
@@ -28,36 +24,20 @@ public class NetworkRelationship {
         this.id = id;
     }
 
-    public Long getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(Long from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 
-    public String getFromCode() {
-        return fromCode;
-    }
-
-    public void setFromCode(String fromCode) {
-        this.fromCode = fromCode;
-    }
-
-    public Long getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(Long to) {
+    public void setTo(String to) {
         this.to = to;
-    }
-
-    public String getToCode() {
-        return toCode;
-    }
-
-    public void setToCode(String toCode) {
-        this.toCode = toCode;
     }
 
     public Map<String, Object> getProperties() {

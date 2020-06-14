@@ -55,7 +55,7 @@ public class NetworkServiceImpl implements NetworkService {
     }
 
     private NetworkNode createNode(Node node, Map<Long, NetworkNode> nodeMap) {
-        NetworkNode networkNode = new NetworkNode(node.id(), node.labels().iterator().next(), node.asMap());
+        NetworkNode networkNode = new NetworkNode((String) node.asMap().get("code"), node.labels().iterator().next(), node.asMap());
         nodeMap.put(node.id(), networkNode);
         return networkNode;
     }
@@ -64,8 +64,7 @@ public class NetworkServiceImpl implements NetworkService {
         NetworkNode startNode = nodeMap.get(relationship.startNodeId());
         NetworkNode endNode = nodeMap.get(relationship.endNodeId());
         NetworkRelationship networkRelationship = new NetworkRelationship(relationship.id(),
-                startNode.getId(), (String) startNode.getProperties().get("code"),
-                endNode.getId(), (String) endNode.getProperties().get("code"), relationship.asMap());
+                startNode.getId(), endNode.getId(), relationship.asMap());
         return networkRelationship;
     }
 

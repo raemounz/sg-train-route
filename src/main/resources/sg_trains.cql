@@ -434,7 +434,7 @@ MATCH (a: Station {code: "PW 5"}), (b: Station {code: "PW 6"}) CREATE (a)-[:CONN
 
 CREATE (:Station {name: "Soo Teck", code: "PW 7", line: "Punggol LRT", bus_interchange: false });
 MATCH (a: Station {code: "PW 6"}), (b: Station {code: "PW 7"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 1, line: "Punggol LRT"}]->(b);
-MATCH (a: Station {code: "PW 6"}), (b: Station {code: "NE 17|PTC"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 3, line: "Punggol LRT"}]->(b);
+MATCH (a: Station {code: "PW 7"}), (b: Station {code: "NE 17|PTC"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 3, line: "Punggol LRT"}]->(b);
 
 
 /* Downtown */
