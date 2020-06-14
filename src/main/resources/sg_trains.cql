@@ -176,7 +176,7 @@ MATCH (a: Station {code: "NS 22|TE 14"}), (b: Station {code: "NS 23"}) CREATE (a
 CREATE (:Station {name: "Dhoby Ghaut", code: "NS 24|NE 6|CC 1", line: "North South", bus_interchange: false, station_interchange: ["NE 6", "CC 1"], interchange_type: ["standard", "standard"], interchange_line: ["North East", "Circle"] });
 MATCH (a: Station {code: "NS 23"}), (b: Station {code: "NS 24|NE 6|CC 1"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 2, line: "North South"}]->(b);
 MATCH (a: Station {code: "NS 24|NE 6|CC 1"}), (b: Station {code: "EW 13|NS 25"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 3, line: "North South"}]->(b);
-MATCH (a: Station {code: "EW 13|NS 25"}), (b: Station {code: "EW 14|NS 26"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 3, line: "North South"}]->(b);
+MATCH (a: Station {code: "EW 13|NS 25"}), (b: Station {code: "EW 14|NS 26"}) CREATE (a)<-[:CONNECTS_TO {travel_time_min: 3, line: "North South"}]-(b);
 
 CREATE (:Station {name: "Marina Bay", code: "NS 27|CE 2|TE 20", line: "North South", bus_interchange: false, station_interchange: ["CE 2", "TE 20"], interchange_type: ["standard", "standard"], interchange_line: ["Circle", "Thomson-East Coast"] });
 MATCH (a: Station {code: "EW 14|NS 26"}), (b: Station {code: "NS 27|CE 2|TE 20"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 3, line: "North South"}]->(b);
@@ -467,7 +467,7 @@ CREATE (:Station {name: "Rochor", code: "DT 13", line: "Downtown", bus_interchan
 MATCH (a: Station {code: "NE 7|DT 12"}), (b: Station {code: "DT 13"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 1, line: "Downtown"}]->(b);
 MATCH (a: Station {code: "DT 13"}), (b: Station {code: "EW 12|DT 14"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 2, line: "Downtown"}]->(b);
 MATCH (a: Station {code: "EW 12|DT 14"}), (b: Station {code: "CC 4|DT 15"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 2, line: "Downtown"}]->(b);
-MATCH (a: Station {code: "CC 4|DT 15"}), (b: Station {code: "CE 1|DT 16"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 2, line: "Downtown"}]->(b);
+MATCH (a: Station {code: "CC 4|DT 15"}), (b: Station {code: "CE 1|DT 16"}) CREATE (a)<-[:CONNECTS_TO {travel_time_min: 2, line: "Downtown"}]-(b);
 
 CREATE (:Station {name: "Downtown", code: "DT 17", line: "Downtown", bus_interchange: false });
 MATCH (a: Station {code: "CE 1|DT 16"}), (b: Station {code: "DT 17"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 2, line: "Downtown"}]->(b);
