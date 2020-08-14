@@ -9,7 +9,7 @@ import {
   positions,
   TrainLine,
   TrainLineColors,
-} from "../../../service/main.service";
+} from "../../../shared/service/main.service";
 
 interface Props {
   ref: any;
@@ -23,7 +23,11 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
   const [visNodes, setVisNodes] = useState<DataSet>();
   const [visEdges, setVisEdges] = useState<DataSet>();
 
-  const LRT = [TrainLine.BukitPanjangLRT, TrainLine.SengkangLRT, TrainLine.PunggolLRT];
+  const LRT = [
+    TrainLine.BukitPanjangLRT,
+    TrainLine.SengkangLRT,
+    TrainLine.PunggolLRT,
+  ];
 
   const networkOptions: any = {
     interaction: {
@@ -44,7 +48,7 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
         background: "#fff",
       },
       shape: "dot",
-      widthConstraint: 100,
+      widthConstraint: 110,
       scaling: {
         label: {
           enabled: true,
@@ -73,7 +77,7 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
       hoverWidth: 1.5,
       smooth: {
         type: "curvedCW",
-        roundness: 0.1,
+        roundness: 0.05,
       },
       width: 10,
     },
@@ -92,12 +96,21 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
       if (networkContainer && props.data.nodes) {
         // Create nodes
         const nodeData = props.data.nodes.map((node: any) => {
+          const nodeColor = node.properties.station_interchange
+            ? "#000"
+            : TrainLineColors[node.properties.line];
           node.label = node.properties.name;
           node.fixed = true;
           node.color = {
-            border: node.properties.station_interchange
-              ? "#000"
-              : TrainLineColors[node.properties.line],
+            border: nodeColor,
+            highlight: {
+              border: nodeColor,
+              background: "#fff",
+            },
+            hover: {
+              border: nodeColor,
+              background: "#fff",
+            },
           };
           if (LRT.includes(node.properties.line)) {
             node.size = 12;

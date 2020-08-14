@@ -1,6 +1,6 @@
 import React from "react";
 import { mainStyle } from "./main.style";
-import Network from "../shared/component/network/Network";
+import Network from "./network/Network";
 
 const Main: React.FC = () => {
   const classes = mainStyle();

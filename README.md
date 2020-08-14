@@ -1,5 +1,10 @@
 # Spring Boot and React
 
+
+Populate network
+./cypher-shell --file ~/Documents/Projects/sg-train-route/src/main/resources/sg_trains.cql 
+
+
 This is a seed project using [Spring Boot](https://start.spring.io) for backend and [React](https://reactjs.org) for frontend.
 
 The frontend is created using [Create React App](https://create-react-app.dev).  It provides named build configurations for development, staging,

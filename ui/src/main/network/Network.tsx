@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { mainService } from "../../service/main.service";
+import { mainService } from "../../shared/service/main.service";
 import { networkStyles } from "./network.style";
 import { CircularProgress } from "@material-ui/core";
 import NetworkGraph from "./graph/NetworkGraph";
