@@ -3,6 +3,7 @@ import { mainService } from "../../shared/service/main.service";
 import { networkStyles } from "./network.style";
 import { CircularProgress } from "@material-ui/core";
 import NetworkGraph from "./graph/NetworkGraph";
+import Search from "./search/Search";
 
 const Network: React.FC = () => {
   const classes = networkStyles();
@@ -26,10 +27,12 @@ const Network: React.FC = () => {
   return (
     <div className={classes.content}>
       <>
-        {stabilized || (
+        {!stabilized ? (
           <div className={classes.stabilizeOverlay}>
             <CircularProgress />
           </div>
+        ) : (
+          <Search />
         )}
         <div className={classes.content} id="network-container">
           <NetworkGraph
