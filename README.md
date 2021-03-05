@@ -3,6 +3,14 @@
 
 Populate network
 ./cypher-shell --file ~/Documents/Projects/sg-train-route/src/main/resources/sg_trains.cql 
+You'll be asked to input username and password
+
+To start dev
+1. start neo4j
+bin/neo4j start
+2. start server
+3. start ui
+
 
 
 This is a seed project using [Spring Boot](https://start.spring.io) for backend and [React](https://reactjs.org) for frontend.
