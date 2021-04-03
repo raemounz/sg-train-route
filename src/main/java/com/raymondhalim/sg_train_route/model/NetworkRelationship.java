@@ -2,12 +2,11 @@ package com.raymondhalim.sg_train_route.model;
 
 import java.util.Map;
 
-public class NetworkRelationship {
+public class NetworkRelationship extends NetworkEntity {
 
     private Long id;
     private String from;
     private String to;
-    private Map<String, Object> properties;
 
     public NetworkRelationship(Long id, String from, String to, Map<String, Object> properties) {
         this.id = id;
@@ -38,14 +37,6 @@ public class NetworkRelationship {
 
     public void setTo(String to) {
         this.to = to;
-    }
-
-    public Map<String, Object> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(Map<String, Object> properties) {
-        this.properties = properties;
     }
 
     @Override

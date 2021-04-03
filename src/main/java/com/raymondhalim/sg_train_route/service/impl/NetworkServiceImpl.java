@@ -1,5 +1,6 @@
 package com.raymondhalim.sg_train_route.service.impl;
 
+import com.raymondhalim.sg_train_route.model.NetworkEntity;
 import com.raymondhalim.sg_train_route.model.NetworkNode;
 import com.raymondhalim.sg_train_route.model.NetworkRelationship;
 import com.raymondhalim.sg_train_route.service.NetworkService;
@@ -20,10 +21,10 @@ public class NetworkServiceImpl implements NetworkService {
     private Driver driver;
 
     @Override
-    public Map<String, Set> getNetwork() throws Exception {
-        Map<String, Set> network = new HashMap<>();
-        Set<NetworkNode> nodes = new HashSet<>();
-        Set<NetworkRelationship> relationships = new HashSet<>();
+    public Map<String, Set<NetworkEntity>> getNetwork() throws Exception {
+        Map<String, Set<NetworkEntity>> network = new HashMap<>();
+        Set<NetworkEntity> nodes = new HashSet<>();
+        Set<NetworkEntity> relationships = new HashSet<>();
 
         try (Session session = driver.session()) {
             String query = "MATCH (n)-[r]-(m) RETURN n,r,m";
@@ -54,18 +55,17 @@ public class NetworkServiceImpl implements NetworkService {
         }
     }
 
-    private NetworkNode createNode(Node node, Map<Long, NetworkNode> nodeMap) {
-        NetworkNode networkNode = new NetworkNode((String) node.asMap().get("code"), node.labels().iterator().next(), node.asMap());
+    private NetworkEntity createNode(Node node, Map<Long, NetworkNode> nodeMap) {
+        NetworkNode networkNode = new NetworkNode((String) node.asMap().get("code"), node.labels().iterator().next(),
+                node.asMap());
         nodeMap.put(node.id(), networkNode);
         return networkNode;
     }
 
-    private NetworkRelationship createRelationship(Relationship relationship, Map<Long, NetworkNode> nodeMap) {
+    private NetworkEntity createRelationship(Relationship relationship, Map<Long, NetworkNode> nodeMap) {
         NetworkNode startNode = nodeMap.get(relationship.startNodeId());
         NetworkNode endNode = nodeMap.get(relationship.endNodeId());
-        NetworkRelationship networkRelationship = new NetworkRelationship(relationship.id(),
-                startNode.getId(), endNode.getId(), relationship.asMap());
-        return networkRelationship;
+        return new NetworkRelationship(relationship.id(), startNode.getId(), endNode.getId(), relationship.asMap());
     }
 
 }

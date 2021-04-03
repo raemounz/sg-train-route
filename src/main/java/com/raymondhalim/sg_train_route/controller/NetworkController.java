@@ -1,5 +1,6 @@
 package com.raymondhalim.sg_train_route.controller;
 
+import com.raymondhalim.sg_train_route.model.NetworkEntity;
 import com.raymondhalim.sg_train_route.service.NetworkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class NetworkController {
     private NetworkService networkService;
 
     @GetMapping("/all")
-    public Map<String, Set> getNetwork() throws Exception {
+    public Map<String, Set<NetworkEntity>> getNetwork() throws Exception {
         return networkService.getNetwork();
     }
 
