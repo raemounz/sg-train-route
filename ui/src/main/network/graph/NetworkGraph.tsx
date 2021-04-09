@@ -16,6 +16,8 @@ interface Props {
   containerId: string;
   data: any;
   stabilizationDone: () => void;
+  onHoverNode: (nodeId: any, pointer: any) => void;
+  onBlurNode: (nodeId: any) => void;
 }
 
 const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
@@ -117,6 +119,12 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
           }
           node.x = positions[`${node.id}`].x;
           node.y = positions[`${node.id}`].y;
+          node.properties.lines = node.properties.lines.map((l: any) => {
+            if (typeof l === "string") {
+              return JSON.parse(l);
+            }
+            return l;
+          });
           return node;
         });
         const nodes = new DataSet(nodeData);
@@ -137,6 +145,15 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
           networkOptions
         );
         setVisNetwork(network);
+
+        network.on("hoverNode", (params: any) => {
+          props.onHoverNode(params.node, {
+            x: params.pointer.DOM.x,
+            y: params.pointer.DOM.y,
+          });
+        });
+
+        network.on("blurNode", (params: any) => props.onBlurNode(params.node));
 
         props.stabilizationDone();
       }

@@ -195,6 +195,14 @@ class MainService {
   getNetwork(): Promise<any> {
     return axios.get(`${process.env.REACT_APP_API_URL}/network/all`);
   }
+
+  getRoutes(search: any): Promise<any> {
+    return axios.get(
+      `${process.env.REACT_APP_API_URL}/network/routes?from=${encodeURI(
+        search.from
+      )}&to=${encodeURI(search.to)}`
+    );
+  }
 }
 
 export const mainService = new MainService();

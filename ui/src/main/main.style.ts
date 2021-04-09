@@ -10,5 +10,12 @@ export const mainStyle = makeStyles((theme: Theme) =>
       flexGrow: 1,
       position: "relative",
     },
+    title: {
+      position: "absolute",
+      margin: "24px",
+      fontSize: "2em",
+      fontWeight: "bold",
+      color: "#dd3c3f",
+    },
   })
 );

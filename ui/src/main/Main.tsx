@@ -8,6 +8,7 @@ const Main: React.FC = () => {
   return (
     <div className={classes.container}>
       <main className={classes.mainContent}>
+        <div className={classes.title}>Singapore Train Route</div>
         <Network />
       </main>
     </div>
