@@ -56,6 +56,7 @@ const StationPreview: React.FC<Props> = (props: Props) => {
           <CircularProgress className={classes.mapInProgress} />
           <iframe
             src={props.data?.properties.googleMap}
+            title="Station Preview"
             className={classes.map}
             loading="lazy"
           ></iframe>
@@ -76,6 +77,7 @@ const StationPreview: React.FC<Props> = (props: Props) => {
               <div>{l.location}</div>
               <img
                 src={l.operator === "SMRT" ? smrtImg : sbsImg}
+                alt="operator"
                 style={{
                   width: l.operator === "SMRT" ? "65px" : "80px",
                   margin: "auto",

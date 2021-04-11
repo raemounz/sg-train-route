@@ -975,7 +975,7 @@ CREATE (:Station {name: "Punggol Point", code: "PW 3", line: "Punggol LRT", bus_
 MATCH (a: Station {code: "PW 1"}), (b: Station {code: "PW 3"}) CREATE (a)-[:CONNECTS_TO {travel_time_min: 2, line: "Punggol LRT"}]->(b);
 
 CREATE (:Station {name: "Samudera", code: "PW 4", line: "Punggol LRT", bus_interchange: false,
-    names: ["amudera", "山姆", "சமுத்திரா", "Samudera"], coordinates: "1°24′57.42″N 103°54′6.68″E",
+    names: ["Samudera", "山姆", "சமுத்திரா", "Samudera"], coordinates: "1°24′57.42″N 103°54′6.68″E",
     googleMap: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6000277846642!2d103.89966691528237!3d1.4159499989673419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMjQnNTcuNCJOIDEwM8KwNTQnMDYuNyJF!5e0!3m2!1sen!2ssg!4v1617435000305!5m2!1sen!2ssg",
     lines: [apoc.convert.toJson({code: "PW 4", line: "Punggol LRT", location: "61 Punggol Way Singapore 828645", operator: "SBS"})],
     parking: false, bicycle_facilities: false, disabled_access: true });

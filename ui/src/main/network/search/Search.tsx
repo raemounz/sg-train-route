@@ -1,27 +1,44 @@
 import React, { useEffect, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { IconButton, TextField } from "@material-ui/core";
+import {
+  Button,
+  CircularProgress,
+  IconButton,
+  TextField,
+} from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import SwapVertIcon from "@material-ui/icons/SwapVert";
 import { searchStyles } from "./search.style";
 import { mainService } from "../../../shared/service/main.service";
+import moment from "moment";
 
 interface Props {
   data: any;
+  onSearchResults: (nodes: string[]) => void;
 }
 
 const Search: React.FC<Props> = (props: Props) => {
   const classes = searchStyles();
   const [stations, setStations] = useState<any>([]);
-  const [search, setSearch] = useState<any>({ from: undefined, to: undefined });
+  const emptySearch = { from: undefined, to: undefined };
+  const [search, setSearch] = useState<any>(emptySearch);
+  const [inProgress, setInProgress] = useState(false);
+  const [searchResult, setSearchResult] = useState<any>(undefined);
 
   useEffect(() => {
-    console.log("search change", search);
     if (search.from && search.to) {
+      setInProgress(true);
+      setSearchResult(undefined);
       mainService
         .getRoutes({ from: search.from.id, to: search.to.id })
-        .then((response: any) => {})
+        .then((response: any) => {
+          setSearchResult(response.data);
+          props.onSearchResults(response.data.nodes);
+          setInProgress(false);
+        })
         .catch((error: any) => console.log("error", error));
+    } else {
+      props.onSearchResults([]);
     }
   }, [search]);
 
@@ -37,6 +54,16 @@ const Search: React.FC<Props> = (props: Props) => {
     _search.from = search.to;
     _search.to = _temp;
     setSearch(_search);
+  };
+
+  const getTravelTime = (minutes: any) => {
+    const duration = moment.duration(minutes, "minutes");
+    const hours = duration.hours();
+    const mins = duration.minutes();
+    if (hours > 0) {
+      return `${hours} hr ${mins} min`;
+    }
+    return `${mins} min`;
   };
 
   const Selection = ({ label, onChange, value }) => {
@@ -62,6 +89,7 @@ const Search: React.FC<Props> = (props: Props) => {
 
   return (
     <Paper className={classes.container}>
+      <div className={classes.title}>Singapore Train Route</div>
       <Selection
         label="From Station"
         value={search.from}
@@ -84,6 +112,27 @@ const Search: React.FC<Props> = (props: Props) => {
           setSearch({ ...search, to: value })
         }
       />
+      <Button
+        size="small"
+        color="primary"
+        disabled={!search.from && !search.to}
+        className={classes.reset}
+        onClick={() => {
+          setSearch(emptySearch);
+          setSearchResult(undefined);
+        }}
+      >
+        Reset
+      </Button>
+      {inProgress && <CircularProgress style={{ margin: "auto" }} />}
+      {searchResult && (
+        <>
+          <div className={classes.travelTimeTitle}>Travel Time</div>
+          <div className={classes.travelTime}>
+            {getTravelTime(searchResult.totalCost)}
+          </div>
+        </>
+      )}
     </Paper>
   );
 };

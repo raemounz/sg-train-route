@@ -49,6 +49,10 @@ const Network: React.FC = () => {
     setStationPreview(undefined);
   };
 
+  const onSearchResults = (nodes: string[]) => {
+    networkGraphRef.current.updateGraph(nodes);
+  };
+
   useEffect(() => {
     let isSubscribed = true;
     mainService.getNetwork().then((response: any) => {
@@ -69,7 +73,7 @@ const Network: React.FC = () => {
           <CircularProgress />
         </div>
       ) : (
-        <Search data={graph} />
+        <Search data={graph} onSearchResults={onSearchResults} />
       )}
       <div id="network-container" className={classes.content}>
         <NetworkGraph

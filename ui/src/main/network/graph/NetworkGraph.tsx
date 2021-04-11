@@ -21,9 +21,9 @@ interface Props {
 }
 
 const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
-  const [visNetwork, setVisNetwork] = useState<vis.Network>();
   const [visNodes, setVisNodes] = useState<DataSet>();
   const [visEdges, setVisEdges] = useState<DataSet>();
+  const dimColor = "rgba(0,0,0,.1)";
 
   const LRT = [
     TrainLine.BukitPanjangLRT,
@@ -34,6 +34,8 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
   const networkOptions: any = {
     interaction: {
       hover: true,
+      zoomView: false,
+      dragView: false,
     },
     physics: {
       enabled: false,
@@ -86,10 +88,46 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
   };
 
   useImperativeHandle(ref, () => ({
-    func() {
-      // TODO
+    updateGraph(nodes: string[]) {
+      const allNodes = visNodes.get().map((n: any) => {
+        let nodeColor = n.properties.station_interchange
+          ? "#000"
+          : TrainLineColors[n.properties.line];
+        if (nodes.length > 0 && !nodes.includes(n.id)) {
+          nodeColor = dimColor;
+        }
+        setNodeColor(n, nodeColor);
+        return n;
+      });
+      visNodes.update(allNodes);
+
+      const allEdges = visEdges.get().map((e: any) => {
+        e.color = TrainLineColors[e.properties.line];
+        if (
+          nodes.length > 0 &&
+          (!nodes.includes(e.from) || !nodes.includes(e.to))
+        ) {
+          e.color = dimColor;
+        }
+        return e;
+      });
+      visEdges.update(allEdges);
     },
   }));
+
+  const setNodeColor = (node: any, nodeColor) => {
+    node.color = {
+      border: nodeColor,
+      highlight: {
+        border: nodeColor,
+        background: "#fff",
+      },
+      hover: {
+        border: nodeColor,
+        background: "#fff",
+      },
+    };
+  };
 
   useEffect(() => {
     let isSubscribed = true;
@@ -98,22 +136,12 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
       if (networkContainer && props.data.nodes) {
         // Create nodes
         const nodeData = props.data.nodes.map((node: any) => {
+          node.label = node.properties.name;
+          node.fixed = true;
           const nodeColor = node.properties.station_interchange
             ? "#000"
             : TrainLineColors[node.properties.line];
-          node.label = node.properties.name;
-          node.fixed = true;
-          node.color = {
-            border: nodeColor,
-            highlight: {
-              border: nodeColor,
-              background: "#fff",
-            },
-            hover: {
-              border: nodeColor,
-              background: "#fff",
-            },
-          };
+          setNodeColor(node, nodeColor);
           if (LRT.includes(node.properties.line)) {
             node.size = 12;
           }
@@ -144,7 +172,6 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
           { nodes: nodes, edges: edges },
           networkOptions
         );
-        setVisNetwork(network);
 
         network.on("hoverNode", (params: any) => {
           props.onHoverNode(params.node, {
