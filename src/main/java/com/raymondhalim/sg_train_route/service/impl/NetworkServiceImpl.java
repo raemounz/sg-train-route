@@ -18,9 +18,6 @@ import java.util.*;
 @Service
 public class NetworkServiceImpl implements NetworkService {
 
-    static final String TOTAL_COST = "totalCost";
-    static final String NODE_CODES = "nodeCodes";
-
     @Autowired
     private Driver driver;
 
@@ -75,16 +72,20 @@ public class NetworkServiceImpl implements NetworkService {
     @Override
     public void initGraph() throws Exception {
         try (Session session = driver.session()) {
-            String query = "CALL gds.graph.create('SGTrainNetwork', 'Station', 'CONNECTS_TO', {relationshipProperties: 'travel_time_min'})";
-            session.run(query);
+            String query = "CALL gds.graph.exists('SGTrainNetwork') YIELD exists";
+            boolean graphExists  = (boolean) session.run(query).single().asMap().get("exists");
+            if (!graphExists) {
+                query = String.join(" ",
+                    "CALL gds.graph.create('SGTrainNetwork', 'Station', {", 
+                        "CONNECTS_TO: {", 
+                            "type: 'CONNECTS_TO',",
+                            "orientation: 'UNDIRECTED'",
+                        "}",
+                    "},",
+                    "{ relationshipProperties: 'travel_time_min' })");
+                session.run(query);
+            }
         }
-    }
-
-    private void updateShortestPath(NetworkShortestPath networkShortestPath, Double totalCost, Map<String, Object> recordMap) {
-        networkShortestPath.setTotalCost(totalCost);
-        @SuppressWarnings("unchecked")
-        List<String> nodes = (List<String>) recordMap.get(NODE_CODES);
-        networkShortestPath.setNodes(nodes);
     }
 
     @Override
@@ -108,22 +109,10 @@ public class NetworkServiceImpl implements NetworkService {
                 "ORDER BY index"
             );
 
-            NetworkShortestPath networkShortestPath = new NetworkShortestPath(0d, Collections.<String> emptyList());
-            List<Record> recordsFromTo = session.run(String.format(query, from, to)).list();
-            if (!recordsFromTo.isEmpty()) {
-                Map<String, Object> recordMap = recordsFromTo.get(0).asMap();
-                updateShortestPath(networkShortestPath, (Double) recordMap.get(TOTAL_COST), recordMap);
-            }
-            List<Record> recordsToFrom = session.run(String.format(query, to, from)).list();
-            if (!recordsToFrom.isEmpty()) {
-                Map<String, Object> recordMap = recordsToFrom.get(0).asMap();
-                Double totalCostToFrom = (Double) recordMap.get(TOTAL_COST);
-                if (networkShortestPath.getTotalCost().compareTo(0d) == 0 || totalCostToFrom.compareTo(networkShortestPath.getTotalCost()) < 0) {
-                    updateShortestPath(networkShortestPath, totalCostToFrom, recordMap);
-                }
-            }
-            
-            return networkShortestPath;
+            Map<String, Object> recordMap = session.run(String.format(query, from, to)).single().asMap();
+            @SuppressWarnings("unchecked")
+            List<String> nodes = (List<String>) recordMap.get("nodeCodes");
+            return new NetworkShortestPath((Double) recordMap.get("totalCost"), nodes);
         }
     }
 

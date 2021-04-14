@@ -40,6 +40,7 @@ const Search: React.FC<Props> = (props: Props) => {
     } else {
       props.onSearchResults([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useEffect(() => {
