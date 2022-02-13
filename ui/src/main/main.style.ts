@@ -1,6 +1,6 @@
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { createStyles, makeStyles } from "@mui/styles";
 
-export const mainStyle = makeStyles((theme: Theme) =>
+export const mainStyle = makeStyles(() =>
   createStyles({
     container: {
       height: "100%",

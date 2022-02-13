@@ -1,30 +1,31 @@
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { createStyles, makeStyles } from "@mui/styles";
 
-export const searchStyles = makeStyles((theme: Theme) =>
+export const searchStyles = makeStyles(() =>
   createStyles({
     container: {
       display: "flex",
       flexDirection: "column",
       position: "absolute",
-      top: "24px",
-      left: "24px",
+      top: 24,
+      left: 24,
       zIndex: 1,
-      padding: "16px",
+      padding: 16,
       height: "auto",
     },
     title: {
       fontSize: "1.5em",
       fontWeight: "bold",
       color: "#dd3c3f",
-      marginBottom: "16px",
+      marginBottom: 16,
       textAlign: "center",
     },
     input: {
-      width: 220,
+      width: "100%",
     },
     reset: {
       width: "fit-content",
-      margin: "8px 0 0 auto",
+      marginLeft: "auto !important",
+      marginRight: 0,
     },
     travelTimeTitle: {
       color: "#dd3c3f",
@@ -33,10 +34,10 @@ export const searchStyles = makeStyles((theme: Theme) =>
     travelTime: {
       height: "auto",
       background: "#dd3c3f",
-      marginTop: "5px",
+      marginTop: 5,
       color: "#fff",
       fontSize: "2em",
-      padding: "8px",
+      padding: 8,
       textAlign: "center",
     },
   })

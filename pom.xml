@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.raymondhalim</groupId>
 	<artifactId>sg_train_route</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2.0</version>
 	<name>sg_train_route</name>
 	<description>Singapore Train Route</description>
 
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>org.neo4j.driver</groupId>
 			<artifactId>neo4j-java-driver-spring-boot-starter</artifactId>
-			<version>4.0.1.1</version>
+			<version>4.3.6.0</version>
 		</dependency>
 
 		<dependency>
@@ -131,7 +131,7 @@
 								</configuration>
 							</execution>
 							<execution>
-								<id>generate angular artifact</id>
+								<id>generate react artifact</id>
 								<phase>generate-resources</phase>
 								<goals>
 									<goal>exec</goal>
@@ -175,7 +175,7 @@
 								</configuration>
 							</execution>
 							<execution>
-								<id>generate angular artifact</id>
+								<id>generate react artifact</id>
 								<phase>generate-resources</phase>
 								<goals>
 									<goal>exec</goal>

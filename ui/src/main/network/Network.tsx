@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
+import { CircularProgress } from "@mui/material";
+import LinearScaleIcon from "@mui/icons-material/LinearScale";
+
 import {
   mainService,
   TrainLine,
   TrainLineColors,
 } from "../../shared/service/main.service";
 import { networkStyles } from "./network.style";
-import { CircularProgress } from "@material-ui/core";
 import NetworkGraph from "./graph/NetworkGraph";
 import Search from "./search/Search";
 import StationPreview from "./preview/StationPreview";
-import LinearScaleIcon from "@material-ui/icons/LinearScale";
 
 const Network: React.FC = () => {
   const classes = networkStyles();
@@ -42,7 +43,7 @@ const Network: React.FC = () => {
     }
   };
 
-  const onBlurNode = (nodeId: any) => {
+  const onBlurNode = () => {
     if (stationPreviewElement) {
       stationPreviewElement.style.display = "none";
     }

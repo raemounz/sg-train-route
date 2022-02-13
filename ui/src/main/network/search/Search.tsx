@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import {
+  Autocomplete,
   Button,
   CircularProgress,
   IconButton,
+  Paper,
   TextField,
-} from "@material-ui/core";
-import { Paper } from "@material-ui/core";
-import SwapVertIcon from "@material-ui/icons/SwapVert";
+} from "@mui/material";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
+import moment from "moment";
+
 import { searchStyles } from "./search.style";
 import { mainService } from "../../../shared/service/main.service";
-import moment from "moment";
 
 interface Props {
   data: any;
@@ -70,6 +71,7 @@ const Search: React.FC<Props> = (props: Props) => {
   const Selection = ({ label, onChange, value }) => {
     return (
       <Autocomplete
+        size="small"
         options={stations}
         value={value}
         getOptionLabel={(option: any) => option.label}
@@ -81,6 +83,7 @@ const Search: React.FC<Props> = (props: Props) => {
             {...params}
             label={label}
             variant="outlined"
+            color="secondary"
             margin="dense"
           />
         )}

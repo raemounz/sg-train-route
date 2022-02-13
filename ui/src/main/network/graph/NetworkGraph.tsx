@@ -132,7 +132,7 @@ const NetworkGraph: React.FC<Props> = forwardRef((props: Props, ref) => {
   useEffect(() => {
     let isSubscribed = true;
     if (isSubscribed) {
-      let networkContainer = document.getElementById(props.containerId);
+      const networkContainer = document.getElementById(props.containerId);
       if (networkContainer && props.data.nodes) {
         // Create nodes
         const nodeData = props.data.nodes.map((node: any) => {

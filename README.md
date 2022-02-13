@@ -14,12 +14,12 @@ The project uses the following:
 ![Spring Boot and React Preview 2](ui/src/images/preview_2.png)
 
 ## Prerequisite
-Install [Neo4j](https://neo4j.com/download-center/#community) in your local machine. You can either install the *Community Server* or the *Neo4j Desktop*.  The version used in this project is neo4j-4.2.3.  Download the following plugins and put them inside `<neo4j-installation-path>/plugins`:
+Install [Neo4j](https://neo4j.com/download-center/#community) in your local machine. You can either install the *Community Server* or the *Neo4j Desktop*.  The version used in this project is neo4j-4.4.4.  Download the following plugins and put them inside `<neo4j-installation-path>/plugins`:
 
-- [apoc-4.2.0.2-all.jar](plugins/apoc-4.2.0.2-all.jar)
-- [neo4j-graph-data-science-1.5.1.jar](plugins/neo4j-graph-data-science-1.5.1.jar)
+- [apoc-4.4.0.3-all.jar](plugins/apoc-4.4.0.3-all.jar)
+- [neo4j-graph-data-science-1.8.3.jar](plugins/neo4j-graph-data-science-1.8.3.jar)
 
-Use the exact plugin versions if you have neo4j-4.2.3 installed.
+Use the exact plugin versions if you have neo4j-4.4.4 installed.
 
 Update `<neo4j-installation-path>/conf/neo4j.conf` and make sure you have the following line uncommented:
 
@@ -29,7 +29,7 @@ Update `<neo4j-installation-path>/conf/neo4j.conf` and make sure you have the fo
 
 If you installed the *Community Server*, run `<neo4j-installation-path>/bin/neo4j start` to start the neo4j server.  If you installed the *Neo4j Desktop* instead, just create a new graph database and start it.
 
-Run the following command to populate the network graph.  This is just a one-time setup.
+Run the following command to populate the network graph.  This is a one-time setup.
 
 `<neo4j-installation-path>/bin/cypher-shell --file <project-directory>/sg-train-route/src/main/resources/sg_trains.cql`
 
@@ -43,6 +43,6 @@ The build artifacts will be stored in the `target/` directory.
 
 Run the following in the command prompt:
 
-`java -jar target/sg_train_route-0.0.1-SNAPSHOT.jar`
+`java -jar target/sg_train_route-0.2.0.jar`
 
 Navigate to http://localhost:8080/.
