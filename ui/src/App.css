@@ -1,0 +1,12 @@
+.App {
+  font-family: Roboto;
+  height: 100vh;
+}
+
+.vis-network {
+  outline: none !important;
+}
+
+.MuiAutocomplete-option[aria-selected="true"] {
+  background: #ebebeb !important;
+}

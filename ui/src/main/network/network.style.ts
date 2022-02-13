@@ -1,6 +1,6 @@
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { createStyles, makeStyles } from "@mui/styles";
 
-export const networkStyles = makeStyles((theme: Theme) =>
+export const networkStyles = makeStyles(() =>
   createStyles({
     content: {
       height: "100%",
@@ -17,19 +17,19 @@ export const networkStyles = makeStyles((theme: Theme) =>
     },
     legend: {
       position: "absolute",
-      bottom: "24px",
-      right: "24px",
+      bottom: 24,
+      right: 24,
       height: "auto",
       width: "auto",
     },
     legendHeader: {
       fontSize: "1.2em",
       fontWeight: "bold",
-      marginBottom: "5px",
+      marginBottom: 5,
     },
     legendIcon: {
       verticalAlign: "middle",
-      marginRight: "10px",
+      marginRight: 10,
     },
   })
 );

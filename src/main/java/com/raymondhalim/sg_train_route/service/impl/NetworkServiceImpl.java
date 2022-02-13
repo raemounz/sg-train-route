@@ -93,7 +93,7 @@ public class NetworkServiceImpl implements NetworkService {
         try (Session session = driver.session()) {
             String query = String.join(" ", 
                 "MATCH (source:Station {code: '%s'}), (target:Station {code: '%s'})",
-                "CALL gds.beta.shortestPath.dijkstra.stream('SGTrainNetwork', {",
+                "CALL gds.shortestPath.dijkstra.stream('SGTrainNetwork', {",
                     "sourceNode: id(source),",
                     "targetNode: id(target),",
                     "relationshipWeightProperty: 'travel_time_min'",

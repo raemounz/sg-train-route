@@ -1,13 +1,13 @@
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { createStyles, makeStyles } from "@mui/styles";
 
-export const stationPreviewStyles = makeStyles((theme: Theme) =>
+export const stationPreviewStyles = makeStyles(() =>
   createStyles({
     stationPreview: {
       position: "absolute",
       display: "none",
-      width: "332px",
-      minHeight: "100px",
-      padding: "16px",
+      width: 332,
+      minHeight: 100,
+      padding: 16,
       zIndex: 1,
     },
     container: {
@@ -32,7 +32,7 @@ export const stationPreviewStyles = makeStyles((theme: Theme) =>
     },
     mapContainer: {
       background: "rgba(0,0,0,.1)",
-      height: "200px",
+      height: 200,
       position: "relative",
       display: "flex",
       justifyContent: "center",
@@ -42,8 +42,8 @@ export const stationPreviewStyles = makeStyles((theme: Theme) =>
       position: "absolute",
     },
     map: {
-      width: "300px",
-      height: "200px",
+      width: 300,
+      height: 200,
       border: 0,
       zIndex: 2,
     },

@@ -1,7 +1,7 @@
 import React from "react";
-import "./App.scss";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+
+import "./App.css";
 import theme from "./shared/theme";
 import Main from "./main/Main";
 

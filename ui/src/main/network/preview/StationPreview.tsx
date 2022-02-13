@@ -1,13 +1,14 @@
 import React from "react";
+import { CircularProgress, Paper, Tooltip } from "@mui/material";
+import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import LocalParkingIcon from "@mui/icons-material/LocalParking";
+import DirectionsBikeIcon from "@mui/icons-material/DirectionsBike";
+import AccessibleIcon from "@mui/icons-material/Accessible";
+
 import { stationPreviewStyles } from "./station-preview";
 import { TrainLineColors } from "../../../shared/service/main.service";
-import { CircularProgress, Paper, Tooltip } from "@material-ui/core";
 import sbsImg from "../../../images/sbs.png";
 import smrtImg from "../../../images/smrt.png";
-import DirectionsBusIcon from "@material-ui/icons/DirectionsBus";
-import LocalParkingIcon from "@material-ui/icons/LocalParking";
-import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
-import AccessibleIcon from "@material-ui/icons/Accessible";
 
 interface Props {
   data: any;
@@ -15,6 +16,7 @@ interface Props {
 
 const StationPreview: React.FC<Props> = (props: Props) => {
   const classes = stationPreviewStyles();
+  const SMRT = "SMRT";
 
   const OtherInfo = ({ info, infoLabel, Icon }) => {
     return (
@@ -76,10 +78,10 @@ const StationPreview: React.FC<Props> = (props: Props) => {
               </div>
               <div>{l.location}</div>
               <img
-                src={l.operator === "SMRT" ? smrtImg : sbsImg}
+                src={l.operator === SMRT ? smrtImg : sbsImg}
                 alt="operator"
                 style={{
-                  width: l.operator === "SMRT" ? "65px" : "80px",
+                  width: l.operator === SMRT ? 65 : 80,
                   margin: "auto",
                 }}
               />
